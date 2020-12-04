@@ -16,7 +16,7 @@ with open('C:\\Advent\\day4.txt', 'r') as file:
     c1=0
     c2=0
     for x in data:
-        vals = {y.split(':')[0]:y.split(':')[1] for y in x.split(' ') for x in data}
+        vals = {y.split(':')[0]:y.split(':')[1] for y in x.split(' ')}
         if len([z for z in ok.keys() if z in vals.keys()]) == 7:
             c1 += 1
             if unicode(vals['byr'], 'utf-8').isnumeric() and len(vals['byr']) == 4 and ok['byr'][0] <= int(vals['byr']) <= ok['byr'][1] \
