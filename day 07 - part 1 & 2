@@ -1,11 +1,8 @@
 def gold_bag_finder(bags, contents, found=False):
-    if found:
-        return found
-    if contents:
-        for k in contents.keys():
-            if 'shiny gold' in k:
-                found = True
-            found = gold_bag_finder(bags, bags[k], found)
+    for k in contents.keys():
+        if 'shiny gold' in k:
+            found = True
+        found = gold_bag_finder(bags, bags[k], found)
     return found
 
 def content_finder(bags, contents):
