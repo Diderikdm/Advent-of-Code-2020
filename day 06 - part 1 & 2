@@ -6,6 +6,3 @@ with open("C:\\Advent\\day6.txt", "r") as file:
         grouped_data = reduce(lambda x,y:x+y, group)
         c += len(set(''.join([x for x in grouped_data if grouped_data.count(x) == len(group)])))
     print('Part 2: {}'.format(c))
-       
-
-    
