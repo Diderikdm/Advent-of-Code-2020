@@ -11,15 +11,14 @@ def content_finder(bags, contents):
         for x in range(v):
             totalnumber += 1
             content_finder(bags, bags[k])
+    return totalnumber
             
 with open("C:\\Advent\\day7.txt", "r") as file:
     data = [y.split(" contain ") for y in [x.strip() for x in file.read().splitlines()]]
     bags = {}
-    global totalnumber
     totalnumber = 0
     for bag in data:
         bag = [bag[0], bag[1].replace('bag.', 'bags.').replace('bag,','bags,').strip('.')] 
         bags[bag[0]] = {x[2:]:(int(x[0])) for x in bag[1].split(', ') if not x[0].isalpha()}
-    content_finder(bags, bags['shiny gold bags'])
     print('Part 1: {}'.format(len([k for k,v in bags.items() if gold_bag_finder(bags,v)])))
-    print('Part 2: {}'.format(totalnumber))
+    print('Part 2: {}'.format(content_finder(bags, bags['shiny gold bags'])))
