@@ -24,7 +24,7 @@ def find_data(data):
 with open("C:\\Advent\\day8.txt", "r") as file:
     data = [x.strip() for x in file.read().splitlines()]
     print('Part 1: {}'.format(find_data(data)[0]))
-    alter = [index for index in range(len(data)-1) if data[index] and data[index].split(' ')[0] in ['jmp','nop']]
+    alter = [index for index in range(len(data)-1) if data[index].split(' ')[0] in ['jmp','nop']]
     for x in alter:
         trydata = data[:]
         trydata[x] = 'jmp'+' '+trydata[x].split(' ')[1] if trydata[x].split(' ')[0] == 'nop' else 'nop'+' '+trydata[x].split(' ')[1]
