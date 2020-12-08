@@ -1,4 +1,4 @@
-def run_instruction(x, i):
+def run_instruction(x):
     global acc
     operator, offset = x.split(' ')
     if operator == 'jmp':
@@ -15,7 +15,7 @@ def find_data(data):
     indexes = [0]
     i = 0
     while i < len(data):
-        offset = run_instruction(data[i], i)
+        offset = run_instruction(data[i])
         if not i+offset in indexes:
             indexes.append(i+offset)
         else:
