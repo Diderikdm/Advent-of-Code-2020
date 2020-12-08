@@ -26,5 +26,5 @@ with open("C:\\Advent\\day8.txt", "r") as file:
     print('Part 1: {}'.format(find_data(data)[0]))
     alter = [index for index in range(len(data)-1) if data[index].split(' ')[0] in ['jmp','nop']]
     for x in alter:
-        if find_data(data[:x] + [data[x].replace('nop','jmp') if data[x].split(' ')[0] == 'nop' else data[x].replace('jmp','nop')]+data[x+1:])[1]:
+        if find_data(data[:x] + [data[x].replace('nop','jmp') if data[x].split(' ')[0] == 'nop' else data[x].replace('jmp','nop')] + data[x+1:])[1]:
             print('Part 2: {}'.format(acc))
