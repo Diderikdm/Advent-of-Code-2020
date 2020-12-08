@@ -3,10 +3,8 @@ def run_instruction(x):
     operator, offset = x.split(' ')
     if operator == 'jmp':
         return int(offset)
-    elif operator == 'acc':
-        acc += int(offset)
-        return 1
-    elif operator == 'nop':
+    else:
+        acc += int(offset) if operator == 'acc' else 0
         return 1
 
 def find_data(data):
