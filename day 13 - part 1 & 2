@@ -4,12 +4,11 @@ with open("C:\\Advent\\day13.txt", "r") as file:
     time, busses = [int(data[0]), [(int(x) if x != 'x' else x) for x in data[1].split(',')]]
     schedule = {bus:bus*int(ceil(float(time)/float(bus)))-time for bus in busses if bus != 'x'}
     indexes = {busses[i]:i for i in range(len(busses))}
-    sorted_busses = sorted([bus for bus in busses if bus != 'x'], reverse=True)
     first_bus, index_first_bus = busses[0], indexes[busses[0]]
     while True:
         marker = 0
         interval_to_compare = first_bus
-        for bus in sorted_busses[:-1]:
+        for bus in sorted([bus for bus in busses if bus != 'x'], reverse=True)[:-1]:
             valids = []
             while True:
                 marker += interval_to_compare
