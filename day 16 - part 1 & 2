@@ -3,9 +3,8 @@ with open("C:\Advent\day16.txt", "r") as file:
     my_ticket = [int(x) for x in data.split('your ticket:')[1].split('nearby tickets:')[0].strip('\n').split(',')]
     nearby_tickets = [[int(x) for x in y.split(',')] for y in data.split('nearby tickets:')[1].strip('\n').split('\n')]
     raw_rules = {x.split(':')[0] : x for x in data.split('your ticket:')[0].strip('\n').split('\n')}
-    rules = {y.split(':')[0] : \
-                                 (lambda x, val : int(x.split(': ')[1].split(' or ')[0].split('-')[0]) <= val <= int(x.split(': ')[1].split(' or ')[0].split('-')[1]) or\
-                                                  int(x.split(': ')[1].split(' or ')[1].split('-')[0]) <= val <= int(x.split(': ')[1].split(' or ')[1].split('-')[1]))  \
+    rules = {y.split(':')[0] : (lambda x, val : int(x.split(': ')[1].split(' or ')[0].split('-')[0]) <= val <= int(x.split(': ')[1].split(' or ')[0].split('-')[1]) or\
+                                                int(x.split(': ')[1].split(' or ')[1].split('-')[0]) <= val <= int(x.split(': ')[1].split(' or ')[1].split('-')[1]))  \
              for y in data.split('your ticket:')[0].strip('\n').split('\n')}  
     invalids = [[x for x in row if not any([rules[rule](raw_rules[rule],x) for rule in rules.keys()])] for row in nearby_tickets]
     print('Part 1: {}'.format(sum([sum([x for x in y]) for y in invalids])))
