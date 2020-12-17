@@ -41,3 +41,47 @@ with open("C:\\Advent\\day17.txt", 'r') as file:
     for x in range(6):
         coords2, mn2, mx2 = iterate_2(coords2, mn2, mx2)
     print('Part 2: {}'.format(len([x for x in coords2.values() if x == '#'])))
+
+
+
+
+
+
+
+
+
+# Generic function for part 1&2:
+
+import itertools
+def iterate(coords, mn, mx, iterator):
+    mn += -1
+    mx += 1
+    a = {tuple(t for t in e) : '.' for e in [v for v in list(itertools.product([i for i in range(mn,mx+1)], repeat=iterator)) if not all([s == 0 for s in v]) and any([x for x in v if x in [mn,mx]])]}
+    coords.update({tuple(t for t in e) : '.' for e in [v for v in list(itertools.product([i for i in range(mn,mx+1)], repeat=iterator)) if not all([s == 0 for s in v]) and any([x in [mn,mx] for x in v])]})
+    new = coords.copy()
+    for key in coords.keys():
+        neighbors = [coords[tuple(key[i]+e[i] for i in range(iterator))] for e in [v for v in list(itertools.product([1,0,-1], repeat=iterator)) if not all([s == 0 for s in v])] \
+                     if tuple(key[i]+e[i] for i in range(iterator)) in coords and coords[tuple(key[i]+e[i] for i in range(iterator))] == '#']
+        if coords[tuple(key[i] for i in range(iterator))] == '#':
+            new[tuple(key[i] for i in range(iterator))] = '#' if len([n for n in neighbors if n == '#']) in [2,3] else '.'
+        else:
+            new[tuple(key[i] for i in range(iterator))] = '#' if len([n for n in neighbors if n == '#']) == 3 else '.'   
+    return new, mn, mx
+
+def run(data, iterator):
+    coords = {(x,y)+tuple(0 for i in range(iterator-2)) : data[y][x] for x in range(len(data)) for y in range(len(data))}
+    start = [v for v in list(itertools.product([i for i in range(len(data))], repeat=iterator)) if not all([s == 0 for s in v])]
+    coords.update({tuple(x for x in v) : '.' for v in start if not all([s == 0 for s in list(v)[2:]])})
+    mn, mx = 0, len(data)-1
+    for x in range(6):
+        coords, mn, mx = iterate(coords, mn, mx, iterator)
+    return coords
+
+with open("C:\\Advent\\day17.txt", 'r') as file:
+    data = [x.strip() for x in file.read().splitlines()]
+    print('Part 1: {}'.format(len([x for x in run(data, 3).values() if x == '#'])))
+    print('Part 2: {}'.format(len([x for x in run(data, 4).values() if x == '#'])))
+
+
+
+
