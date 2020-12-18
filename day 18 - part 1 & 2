@@ -5,20 +5,17 @@ def calculate(eq, tot=0, p2=False):
             for e in range(0, len(numbers), 2):
                 if e+2 < len(numbers):
                     if numbers[e+1] == '*':
-                        numbers2.append(tot)
-                        numbers2.append(numbers[e+1])
+                        numbers2 += [tot, numbers[e+1]]
                         tot = numbers[e+2]
                     else:
                         tot += numbers[e+2]
-            numbers2.append(tot)
-            numbers = [x for x in numbers2]
+            numbers = [x for x in numbers2] + [tot]
             tot = numbers[0]
         for e in range(0, len(numbers), 2):
             if e+2 < len(numbers):
                 tot = tot+numbers[e+2] if numbers[e+1] == '+' else tot*numbers[e+2]
         return eq[i+1:], tot, -1
-    numbers = []
-    i = 0
+    numbers, i = [], 0
     while i < len(eq):
         if eq[i] == '(':
             eq, val, i = calculate(eq[i+1:], p2=p2)
@@ -28,16 +25,13 @@ def calculate(eq, tot=0, p2=False):
                 numbers.append(int(eq[:i]))
             elif eq[:i] in ['+','*']:
                 numbers.append(eq[i-1:i])
-            eq = eq[i+1:]
-            i = -1           
+            eq, i = eq[i+1:], -1      
         elif eq[i] == ')':
             if eq[:i].isalnum():
                 numbers.append(int(eq[:i]))
-            tot = numbers[0]
-            return calc(numbers, tot)
+            return calc(numbers, numbers[0])
         i += 1
-    tot = numbers[0]
-    return calc(numbers, tot)[1]
+    return calc(numbers, numbers[0])[1]
                 
 with open("C:\\Advent\\day18.txt", 'r') as file:
     data = [x.strip()+' ' for x in file.read().splitlines()]
