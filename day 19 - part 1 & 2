@@ -13,22 +13,22 @@ def find(val):
 with open("C:\\Advent\\day19.txt", 'r') as file:
     ruledata, data = [x.split('\n') for x in file.read().split('\n\n')]
     rules = {x.split(':')[0] : x.split(': ')[1] for x in ruledata}
-    result, eight, eleven = find(rules['0']), find(rules['8'])[0], find(rules['11'])[0]
+    result, result_8, result_11 = find(rules['0']), find(rules['8'])[0], find(rules['11'])[0]
     print('Part 1: {}'.format(len([x for x in data if x in result[0]])))
-    valids = []
+    valids, max_8, max_11 = [], len(max(result_8)), len(max(result_11))
     for y in data:    
-        for x in range(len(max(eleven)), len(y), len(max(eleven))):
-            elevens = int(x/len(max(eleven)))
-            eights = int((len(y) - elevens*len(max(eleven)))/len(max(eight)))
+        for x in range(max_11, len(y), max_11):
+            elevens = int(x/max_11)
+            eights = int((len(y) - elevens*max_11)/max_8)
             for z in range(1, eights+1):
-                if not y[int(len(max(eight))*z-len(max(eight))):int(len(max(eight))*z)] in eight:
+                if not y[int(max_8*z-max_8):int(max_8*z)] in result_8:
                     break
             else:
-                w = y[eights*len(max(eight)):]
+                w = y[eights*max_8:]
                 for z in range(1, elevens+1):
-                    if not w[:int(len(max(eleven))/2)]+w[-int(len(max(eleven))/2):] in eleven:
+                    if not w[:int(max_11/2)]+w[-int(max_11/2):] in result_11:
                         break
-                    w = w[int(len(max(eleven))/2):-int(len(max(eleven))/2)]
+                    w = w[int(max_11/2):-int(max_11/2)]
                 else:
                      valids.append(y)
                      break
