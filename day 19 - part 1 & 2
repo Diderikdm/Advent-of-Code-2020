@@ -16,7 +16,9 @@ with open("C:\\Advent\\day19.txt", 'r') as file:
     result, result_8, result_11 = find(rules['0']), find(rules['8'])[0], find(rules['11'])[0]
     print('Part 1: {}'.format(len([x for x in data if x in result[0]])))
     valids, max_8, max_11 = [], len(max(result_8)), len(max(result_11))
-    for y in data:    
+    for y in data:
+        if len(y)%max_8 != 0:
+            continue
         for x in range(max_11, len(y), max_11):
             elevens = int(x/max_11)
             eights = int((len(y) - elevens*max_11)/max_8)
