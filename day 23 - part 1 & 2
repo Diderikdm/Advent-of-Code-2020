@@ -16,6 +16,5 @@ with open("C:\\Advent\\day23.txt", 'r') as file:
         x = data[x]
         p1.append(x)
     print('Part 1: {}'.format(''.join([str(x) for x in p1])))
-    data = data_p2 + [x for x in range(len(data)+1, 1000001)]
-    data = play(data, maxval=1000000, times=10000000)
+    data = play(data_p2 + [x for x in range(len(data)+1, 1000001)], maxval=1000000, times=10000000)
     print('Part 2: {}'.format(data[1]*data[data[1]]))
