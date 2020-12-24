@@ -1,4 +1,4 @@
-import copy
+import copy, math
 with open("C:\\Advent\\day24.txt", 'r') as file:
     data = [x.strip() for x in file.read().splitlines()]
     instructions = []
@@ -12,8 +12,9 @@ with open("C:\\Advent\\day24.txt", 'r') as file:
                 instruction.append(x[i])
                 i+=1
         instructions.append(instruction[:])
-    floor = [[0 for x in range(-len(max(instructions)*6), len(max(instructions)*6)+1)] for y in range(-len(max(instructions)*6), len(max(instructions)*6)+1)]
-    start = [len(max(instructions))*6, len(max(instructions))*6]
+    times = int(math.ceil(100/len(max(instructions))))+2
+    floor = [[0 for x in range(-len(max(instructions)*times), len(max(instructions)*times)+1)] for y in range(-len(max(instructions)*times), len(max(instructions)*times)+1)]
+    start = [len(max(instructions))*times, len(max(instructions))*times]
     move = {'w': lambda a: (a[0] + 2, a[1]), 'e': lambda a: (a[0] - 2, a[1]), 'nw': lambda a: (a[0] + 1, a[1] + 1), 'ne': lambda a:  (a[0] - 1, a[1] + 1), 'sw': lambda a: (a[0] + 1, a[1] - 1), 'se': lambda a: (a[0] - 1, a[1] - 1)}
     for instruction in instructions:
         current = start
