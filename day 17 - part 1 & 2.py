@@ -51,6 +51,7 @@ with open("C:\\Advent\\day17.txt", 'r') as file:
 
 
 # Generic function for part 1&2:
+'''
 
 import itertools
 def iterate(coords, mn, mx, iterator):
@@ -80,8 +81,4 @@ def run(data, iterator):
 with open("C:\\Advent\\day17.txt", 'r') as file:
     data = [x.strip() for x in file.read().splitlines()]
     print('Part 1: {}'.format(len([x for x in run(data, 3).values() if x == '#'])))
-    print('Part 2: {}'.format(len([x for x in run(data, 4).values() if x == '#'])))
-
-
-
-
+    print('Part 2: {}'.format(len([x for x in run(data, 4).values() if x == '#'])))'''
