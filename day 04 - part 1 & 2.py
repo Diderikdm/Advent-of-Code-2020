@@ -30,4 +30,3 @@ with open('C:\\Advent\\day4.txt', 'r') as file:
                 c2 += 1                
     print ('Part 1: {}'.format(c1))
     print ('Part 2: {}'.format(c2))
-            
